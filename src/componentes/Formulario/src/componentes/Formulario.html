@@ -1,0 +1,73 @@
+
+<section class="src-componentes-formulario">
+  <div class="jumbotron">
+    <h2>POST a mockapi.io</h2>
+    <br>
+    <br>
+
+    <!-- USANDO THEN CATCH -->
+    <!-- <vue-form :state="formState" @submit.prevent="postUsuarioThenCatch"> -->
+
+    <!-- USANDO ASYNC AWAIT -->
+    <vue-form :state="formState" @submit.prevent="postUsuarioAsyncAwait">
+      
+
+    <validate tag="div">
+      <label for="nombre">Nombre</label>
+      <input type="text"
+      id="nombre"
+      name="nombre"
+      class="form-control"
+      autocomplete="off"
+      required
+      :minlength="nombreMinLength"
+      :maxlength="nombreMaxLength"
+      v-model.trim="formData.nombre">
+      <field-messages name="nombre" show="$dirty">
+        <div slot="required" class="alert alert-danger mt-1">Campo requerido</div>
+        <div slot="minlength" class="alert alert-danger mt-1">Este campo requiere como mínimo {{nombreMinLength}} caractéres</div>
+        <div v-if="formData.nombre.length == nombreMaxLength" class="alert alert-danger mt-1">Este campo permite como máximo {{nombreMaxLength}} caractéres</div>
+      </field-messages>
+    </validate>
+
+    <validate tag="div">
+      <label for="edad">Edad</label>
+      <input type="number"
+      id="edad"
+      name="edad"
+      class="form-control"
+      autocomplete="off"
+      required
+      :min="edadMin"
+      :max="edadMax"
+      v-model.number="formData.edad">
+      <field-messages name="edad" show="$dirty">
+        <div slot="required" class="alert alert-danger mt-1">Campo requerido</div>
+        <div slot="min" class="alert alert-danger mt-1">La edad mínima requerida es de {{edadMin}} años</div>
+        <div slot="max" class="alert alert-danger mt-1">La edad máxima requerida es de {{edadMax}} años</div>
+      </field-messages>
+    </validate>
+
+    <validate tag="div">
+      <label for="email">Email</label>
+      <input type="email"
+      id="email"
+      name="email"
+      class="form-control"
+      autocomplete="off"
+      required
+      v-model.trim="formData.email">
+      <field-messages name="email" show="$dirty">
+        <div slot="required" class="alert alert-danger mt-1">Campo requerido</div>
+        <div slot="email" class="alert alert-danger mt-1">Email inválido</div>
+      </field-messages>
+    </validate>
+
+    <button class="btn btn-success my-3" type="submit" :disabled="formState.$invalid">Enviar</button>
+    </vue-form>
+
+  </div>
+
+</section>
+
+
